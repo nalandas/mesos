@@ -1,0 +1,12 @@
+{
+	"data_dir": "/data",
+	"ui_dir": "/ui",
+	"client_addr": "0.0.0.0",
+	"ports": {
+		"dns": 53
+	},
+	"recursors": [ DNS_UPSTREAM ],
+        "domain": "DOMAIN_NAME",
+	"disable_update_check": true
+}
+
