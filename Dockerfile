@@ -27,6 +27,7 @@ RUN echo "deb http://archive-primary.cloudera.com/cdh5/debian/wheezy/amd64/cdh w
 RUN sed 's/^\(hosts:[\ ]*\)\(files\)\ \(dns\)$/\1\3 \2/' -i /etc/nsswitch.conf
 
 # Install consul
+ENV DISABLE_CONSUL false
 ENV CONSUL_VERSION 0.5.0
 RUN apt-get update && apt-get install -y git unzip curl bash ca-certificates
 ADD https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_linux_amd64.zip /tmp/consul.zip

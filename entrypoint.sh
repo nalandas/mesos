@@ -35,10 +35,15 @@ fi;
 echo "That was a good nap. Now to work..."
 mkdir -p /etc/supervisor/conf.d/
 sed "s#COMMAND#$MESOS_COMMAND#g;" /tmp/mesos.conf > /etc/supervisor/conf.d/mesos.conf
-mkdir /consul_config
-sed "s#DOMAIN_NAME#$DOMAIN_NAME#g;s#DNS_UPSTREAM#$DNS_UPSTREAM#g;" /tmp/consul.json > /consul_config/consul.json
-sed "s#COMMAND#$CONSUL_COMMAND#g;" /tmp/consul.conf > /etc/supervisor/conf.d/consul.conf
+
+if [ x"$DISABLE_CONSUL" = x"true" ]; then
+  echo "Skip run consul!!"
+else
+  mkdir /consul_config
+  sed "s#DOMAIN_NAME#$DOMAIN_NAME#g;s#DNS_UPSTREAM#$DNS_UPSTREAM#g;" /tmp/consul.json > /consul_config/consul.json
+  sed "s#COMMAND#$CONSUL_COMMAND#g;" /tmp/consul.conf > /etc/supervisor/conf.d/consul.conf
+  cat /etc/supervisor/conf.d/consul.conf
+fi
 cat /etc/supervisor/conf.d/mesos.conf
-cat /etc/supervisor/conf.d/consul.conf
 
 supervisord -c /etc/supervisor/supervisord.conf -n
