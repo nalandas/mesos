@@ -35,7 +35,7 @@ ADD https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_web_ui.zip /tmp/we
 RUN mkdir /ui && cd /ui && unzip /tmp/webui.zip && rm /tmp/webui.zip && mv dist/* . && rm -rf dist
 
 #RUN apt-get install -y aptitude && aptitude remove -y libcurl4-nss-dev libsasl2-dev maven libapr1-dev libsvn-dev dh-autoreconf libz-dev autoconf libtool
-RUN apt-get purge --auto-remove -y maven dh-autoreconf autoconf
+RUN apt-get purge --auto-remove -y maven dh-autoreconf autoconf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/mesos/.git && rm -rf /tmp/mesos/build/3rdparty && rm -rf /root/.m2
